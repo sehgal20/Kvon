@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media, Iframes & Graphics</title>
+</head>
+<body>
+
+    <header>
+        <h1>Embedding Media, Iframes, and Graphics</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Audio</h2>
+            <audio controls>
+                <source src="audio-file.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+
+
+        <section>
+            <h2>Google Map</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609892835!2d72.74109907587461!3d19.08250200733261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzI3LjAiTiA3MsKwMzknNTUuMyJF!5e0!3m2!1sen!2sin!4v1631973478627!5m2!1sen!2sin"
+                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </section>
+
+        <section>
+            <h2>Website Embed</h2>
+            <iframe src="https://www.example.com" width="400" height="300"></iframe>
+        </section>
+
+ 
+
+        <section>
+            <h2>SVG Graphic</h2>
+            <svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+            </svg>
+        </section>
+
+        <section>
+            <h2>Canvas Drawing</h2>
+            <canvas id="myCanvas" width="400" height="200"></canvas>
+            <script>
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = "blue";
+                ctx.fillRect(50, 50, 100, 100);
+            </script>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Your Website</p>
+    </footer>
+
+</body>
+</html>
