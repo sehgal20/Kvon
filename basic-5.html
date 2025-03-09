@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Demo</title>
+</head>
+<body>
+    <h1>Geolocation, Web Worker & Storage</h1>
+    
+    <button onclick="getLocation()">Get Location</button>
+    <p id="location">Latitude: - | Longitude: -</p>
+
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+    <p id="workerOutput">Worker: Inactive</p>
+
+    <input type="text" id="nameInput" placeholder="Enter Name">
+    <button onclick="saveName()">Save</button>
+    <button onclick="clearName()">Clear</button>
+    <p id="greet"></p>
+
+    <script>
+        function getLocation() {
+            navigator.geolocation?.getCurrentPosition(
+                ({ coords }) => location.innerHTML = `Latitude: ${coords.latitude} | Longitude: ${coords.longitude}`,
+                (err) => location.innerText = "Error: " + err.message
+            );
+        }
+
+        let worker;
+        function startWorker() {
+            if (!worker) {
+                worker = new Worker(URL.createObjectURL(new Blob([`onmessage = () => { setInterval(() => postMessage(Date.now()), 1000); }`], { type: "application/javascript" })));
+                worker.onmessage = (e) => workerOutput.innerText = "Time: " + new Date(e.data).toLocaleTimeString();
+            }
+        }
+        function stopWorker() {
+            worker?.terminate(), worker = null, workerOutput.innerText = "Worker: Stopped";
+        }
+
+        function saveName() {
+            localStorage.setItem("name", nameInput.value);
+            greet.innerText = "Hello, " + nameInput.value;
+        }
+        function clearName() {
+            localStorage.removeItem("name"), greet.innerText = "";
+        }
+
+        window.onload = () => greet.innerText = localStorage.getItem("name") ? "Hello, " + localStorage.getItem("name") : "";
+    </script>
+</body>
+</html>
